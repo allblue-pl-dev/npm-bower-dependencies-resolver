@@ -6,21 +6,38 @@ var tmp = require('tmp');
 module.exports = function resolver (bower) {
         return {
     match: function (source) {
-        console.log('A');
         return source.indexOf('bdr:') === 0;
     },
     fetch: function (endpoint, cached) {
-        console.log('B');
         var source = endpoint.source;
         var source_array = source.split(':');
         if (source_array.length !== 2)
             throw new Error('Wrong `bdr` format: ' + source);
 
+        var uses_subpaths = false;
+
         var bdr_path = source_array[1];
+        if (bdr_path[bdr_path.length - 1] === '*') {
+            uses_subpaths = true;
+            bdr_path = bdr_path.substring(0, bdr_path.length - 1);
+        }
+
         if (!fs.existsSync(bdr_path))
             throw new Error('`bdr` path does not exist: ' + bdr_path);
 
-        var bower_json_paths = [ path.join(bdr_path, 'bower.json') ];
+        var bower_json_paths = [];
+        if (uses_subpaths) {
+            var bdr_subpaths = fs.readdirSync(bdr_path).filter(function(file) {
+                return fs.statSync(path.join(bdr_path, file)).isDirectory();
+            });
+
+            for (var i = 0; i < bdr_subpaths.length; i++) {
+                bower_json_paths.push(path.join(bdr_path, bdr_subpaths[i],
+                        'bower.json'));
+            }
+        } else
+            bower_json_paths.push(path.join(bdr_path, 'bower.json'));
+
         var final_bower_json = {
             name: endpoint.name,
             dependencies: {},
@@ -33,17 +50,16 @@ module.exports = function resolver (bower) {
                 return;
 
             var bower_json = JSON.parse(fs.readFileSync(bower_json_path, 'utf8'));
-            var dependency_name;
 
             if ('dependencies' in bower_json) {
-                for (dependency_name in bower_json.dependencies) {
+                for (var dependency_name in bower_json.dependencies) {
                     final_bower_json.dependencies[dependency_name] =
                             bower_json.dependencies[dependency_name];
                 }
             }
 
             if ('devDependencies' in bower_json) {
-                for (dependency_name in bower_json.devDependencies) {
+                for (var dependency_name in bower_json.devDependencies) {
                     final_bower_json.devDependencies[dependency_name] =
                             bower_json.devDependencies[dependency_name];
                 }
@@ -51,8 +67,6 @@ module.exports = function resolver (bower) {
         }
 
         var tmp_dir = tmp.dirSync();
-
-        console.log(final_bower_json);
 
         fs.writeFileSync(path.join(tmp_dir.name, 'bower.json'),
                 JSON.stringify(final_bower_json));

@@ -1,11 +1,26 @@
 {
   "name": "bower-dependencies-resolver",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "bower-resolver"
   ],
   "main": "index.js",
   "dependencies": {
     "tmp": "0.0.*"
-  }
+  },
+  "description": "Bower resolver for adding external packages (i.e. git, git submodules) bower dependencies.",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allblue-pl/npm-bower-dependencies-resolver.git"
+  },
+  "author": "Jakub Zolcik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/allblue-pl/npm-bower-dependencies-resolver/issues"
+  },
+  "homepage": "https://github.com/allblue-pl/npm-bower-dependencies-resolver#readme"
 }
