@@ -1,0 +1,11 @@
+{
+  "name": "bower-dependencies-resolver",
+  "version": "0.0.1",
+  "keywords": [
+    "bower-resolver"
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "tmp": "0.0.*"
+  }
+}
