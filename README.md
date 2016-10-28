@@ -2,7 +2,7 @@
 
 *(Before `v0.1.0` usage specification might change and package should be considered unstable.)*
 
-Bower resolver for adding external packages (i.e. git repositories, git submodules, local projects) bower dependencies.
+Bower resolver for adding external (i.e. git repositories, git submodules, local projects) bower dependencies.
 
 ## Description
 

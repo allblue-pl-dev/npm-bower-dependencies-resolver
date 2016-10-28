@@ -1,6 +1,6 @@
 {
   "name": "bower-dependencies-resolver",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "keywords": [
     "bower-resolver"
   ],
@@ -8,7 +8,7 @@
   "dependencies": {
     "tmp": "0.0.*"
   },
-  "description": "Bower resolver for adding external packages (i.e. git repositories, git submodules, local projects) bower dependencies.",
+  "description": "Bower resolver for adding external (i.e. git repositories, git submodules, local projects) bower dependencies.",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
