@@ -32,8 +32,7 @@ To add `bdr` dependecies you have to specify path after `bdr:` prefix.
 ```
 {
   "resolvers": [
-    "bitbucket-resolver",
-    "github-enterprise-resolver"
+    "dependencies-resolver"
   ]
 }
 ```
