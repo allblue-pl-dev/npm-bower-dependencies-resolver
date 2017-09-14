@@ -27,4 +27,15 @@ To add `bdr` dependecies you have to specify path after `bdr:` prefix.
 }
 ```
 
+`.bowerrc`
+
+```
+{
+  "resolvers": [
+    "bitbucket-resolver",
+    "github-enterprise-resolver"
+  ]
+}
+```
+
 For now when defining `path` you can use `*` as last character to iterate through all direct subdirectories. `bower-dependecies-resolver` will compile all `bower.json` files into one "virtual" bower-package and then bower will be able to install all necessary dependecies.
